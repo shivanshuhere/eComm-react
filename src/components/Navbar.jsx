@@ -12,23 +12,27 @@ function Navbar() {
     <>
       <nav className="w-full min-h-20 bg-gray-800 flex justify-between items-center px-10 text-white">
         <h2>Exclusive</h2>
-        <ul className="hidden md:flex gap-3 flex-wrap">
-          <li>
+        <ul className="hidden md:flex justify-center flex-wrap ">
+          <li className="px-3">
             <a href="#">Home</a>
           </li>
-          <li>
+          <li className="px-3">
             <a href="#">Contact</a>
           </li>
-          <li>
+          <li className="px-3">
             <a href="#">About</a>
           </li>
-          <li>
+          <li className="px-3">
             <a href="#">Sign Up</a>
           </li>
         </ul>
         <ul className="flex gap-3 flex-wrap justify-center items-center">
           <li>
-            <input type="text" className="hidden sm:block" />
+            <input
+              type="text"
+              className="hidden sm:block rounded-sm text-xs py-1 px-4"
+              placeholder="What are you looking for?"
+            />
           </li>
           <li>
             <svg
