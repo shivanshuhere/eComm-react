@@ -67,6 +67,7 @@ function Navbar() {
           {menu && (
             <svg
               onClick={handleMenuClick}
+              className="md:hidden"
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
               viewBox="0 -960 960 960"
@@ -80,6 +81,7 @@ function Navbar() {
           {menu || (
             <svg
               onClick={handleMenuClick}
+              className="md:hidden"
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
               viewBox="0 -960 960 960"
@@ -89,22 +91,25 @@ function Navbar() {
               <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
             </svg>
           )}
-
-          {/* <ul className="md:hidden block ">
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Sign Up</a>
-            </li>
-          </ul> */}
         </ul>
+        {menu && (
+          <div className="fixed top-0 left-0 w-[30%] h-screen bg-black/80 p-10">
+            <ul className=" flex flex-col text-4xl gap-10 capitalize font-light">
+              <li>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#">Contact</a>
+              </li>
+              <li>
+                <a href="#">About</a>
+              </li>
+              <li>
+                <a href="#">Sign Up</a>
+              </li>
+            </ul>
+          </div>
+        )}
       </nav>
     </>
   );
