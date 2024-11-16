@@ -22,7 +22,7 @@ const registerUser = asyncHandler(async (req, res) => {
       password,
       address,
     });
-    const newUser = User.findOne({ email: email }).select(
+    const newUser = await User.findOne({ email: email }).select(
       "-password -refreshToken"
     );
     if (!newUser)
