@@ -1,23 +1,31 @@
-import Navbar from "./components/Navbar";
-import AlertBar from "./components/AlertBar";
-import SideMenu from "./components/SideMenu";
-import HeroSection from "./components/HeroSection";
-import Footer from "./components/Footer";
-import Product_card from "./components/Product_card";
-function App() {
-  return (
-    <>
-      <AlertBar />
-      <Navbar />
-      <section className="max-h-[50vh] bg-yellow-400 flex justify-between gap-3 px-10 ">
+import { Outlet } from "react-router-dom"
+import TopHeader from "./components/Header/TopHeader"
+import { useEffect, useState } from "react"
+import Footer from "./components/Footer/Footer"
+import Header from "./components/Header/Header"
 
-        <SideMenu />
-        <HeroSection />
-      </section>
-    <Footer/>
-    <Product_card/>
-    </>
-  );
+const App = () => {
+
+  const [topheaderText, setTopheaderText] = useState('')
+
+  useEffect(() => {
+    setTopheaderText("Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!")
+  }, [])
+
+
+
+  return (
+    <div className=" w-full h-full">
+      {
+        topheaderText &&
+        <TopHeader text={topheaderText} link='/register' />
+      }
+      <Header />
+      <Outlet />
+      <Footer />
+
+    </div>
+  )
 }
 
-export default App;
+export default App
