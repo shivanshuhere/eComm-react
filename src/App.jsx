@@ -3,6 +3,7 @@ import AlertBar from "./components/AlertBar";
 import SideMenu from "./components/SideMenu";
 import HeroSection from "./components/HeroSection";
 import Footer from "./components/Footer";
+import Product_card from "./components/Product_card";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <HeroSection />
       </section>
     <Footer/>
+    <Product_card/>
     </>
   );
 }

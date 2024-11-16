@@ -26,7 +26,7 @@ const registerUser = asyncHandler(async (req, res) => {
       "-password -refreshToken"
     );
     if (!newUser)
-      return res.status(400).json({ error: "failed t o create user" });
+      return res.status(400).json({ error: "failed to create user" });
     return res.status(201).json({
       message: "user created successfully",
       user: newUser,
