@@ -44,8 +44,8 @@ userSchema.pre("save", async function (next) {
   return next();
 });
 
-userSchema.methods.generateRefreshToken = function () {
-  jwt.sign(
+userSchema.methods.generateRefreshToken = async function () {
+  await jwt.sign(
     {
       _id: this._id,
     },
@@ -54,8 +54,8 @@ userSchema.methods.generateRefreshToken = function () {
   );
 };
 
-userSchema.methods.generateAccessToken = function () {
-  jwt.sign(
+userSchema.methods.generateAccessToken = async function () {
+  await jwt.sign(
     {
       _id: this._id,
     },
