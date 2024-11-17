@@ -12,6 +12,7 @@ const Header = () => {
 
     const [user, setUser] = useState("")
 
+
     return (
         <section className=" w-full h-14 lg:h-20 bg-sk-600 border-b-2 flex justify-center items-center border-Black">
             <div className=" w-[95%] md:w-[85%] xl:w-[80%] h-10 bg-rd-600 flex justify-between">

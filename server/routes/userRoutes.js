@@ -1,12 +1,12 @@
 import { Router } from 'express'
-import { register, login }from '../controllers/userController.js'
+import { register, login, otp }from '../controllers/userController.js'
 
 const router = Router()
 
 router.post('/register', register)
 router.post('/login', login)
 // Router.post('/logout', logout)
-// Router.post('/verifyOtp', verifyOtp)
+router.post('/otp', otp)
 // Router.post('/resendOtp', resendOtp)
 
 export default router

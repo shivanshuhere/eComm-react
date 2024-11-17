@@ -1,19 +1,27 @@
 import express from 'express'
 import cors from 'cors'
-import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import router from './routes/userRoutes.js'
 import cookieparser from 'cookie-parser'
-import connectDatabase from './DataBase/connection.js'
 import connectDB from './DataBase/connection.js'
 
 
-dotenv.config()
+dotenv.config(
+    {
+        path: '../.env'
+    }
+)
+
 
 const app = express()
 
 
-app.use(express.json())
+app.use(express.json(
+    {
+        limit: '150kb',
+        extended: true 
+    }
+))
 app.use(cookieparser())
 app.use(cors({
     origin: '*',
