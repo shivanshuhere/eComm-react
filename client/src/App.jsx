@@ -8,11 +8,11 @@ import Product_card from "./components/Product_card"
 const App = () => {
 
   const [topheaderText, setTopheaderText] = useState('')
-
   useEffect(() => {
     setTopheaderText("Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!")
   }, [])
-
+  const [newItem,setNewItem]=useState(true)
+  const [discount,setDiscount]=useState(true)
 
 
   return (
@@ -23,7 +23,21 @@ const App = () => {
       }
       <Header />
       <Outlet />
-      <Product_card productName="Gucci KA" />
+      {
+       <div>
+
+        {
+          
+          newItem && <Product_card text='New' color='bg-[#00FF66]'  />
+        } 
+        {
+          discount && <Product_card text='-35%' color='bg-[#DB4444]'  />
+
+        }
+       </div>
+
+
+      }
       <Footer />
 
     </div>
