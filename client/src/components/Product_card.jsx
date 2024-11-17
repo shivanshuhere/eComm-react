@@ -6,7 +6,7 @@ import { FiEye } from "react-icons/fi";
 import { GoHeart } from "react-icons/go";
 
 
-const Product_card = () => {
+const Product_card = (props) => {
     return (
         <>
             <div className='h-80 w-72 bg-red-800 '>
@@ -23,7 +23,7 @@ const Product_card = () => {
                     </div>
                 </div>
                 <div className='h-1/3 bg-white w-full pt-5 pl-1 '>
-                    <h2 className='text-black text-xl font-semibold' >Gucci duffle bag</h2>
+                    <h2 className='text-black text-xl font-semibold' >{props.productName} </h2>
                     <div className='flex items-center gap-10 justify-start'>
                         <h3 className='text-red-500 font-semibold'>$960</h3>
                         <h3 className='text-gray-400  stroke-black line-through'>$1160</h3>

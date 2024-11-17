@@ -3,6 +3,7 @@ import TopHeader from "./components/Header/TopHeader"
 import { useEffect, useState } from "react"
 import Footer from "./components/Footer/Footer"
 import Header from "./components/Header/Header"
+import Product_card from "./components/Product_card"
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
       }
       <Header />
       <Outlet />
+      <Product_card productName="Gucci KA" />
       <Footer />
 
     </div>
