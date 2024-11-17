@@ -9,7 +9,7 @@ const SendEmail = async (email, generatedOtp) => {
       secure: true,
       auth: {
         user: 'quickcartspprt@gmail.com',
-        pass: 'sptokcjdeaucpzyc'
+        pass: process.env.EMAIL_SECRET
       }
     });
 
