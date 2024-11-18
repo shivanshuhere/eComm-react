@@ -1,19 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CiStar } from "react-icons/ci";
 import { FiEye } from "react-icons/fi";
 
 
 import { GoHeart } from "react-icons/go";
+import BTN from './BTN';
 
 
 const Product_card = (props) => {
+  const [discount,setDiscount]=useState(true)
+  const [newItem,setNewItem]=useState(false)
+
+
     return (
         <>
-            <div className='h-80 w-72 bg-red-800 '>
-                <div className='h-4/5 w-full relative bg-white rounded-md flex items-start justify-end  '>
-                <div className=' absolute left-2 top-4 '>
-                <p className={`${props.color} px-4 py-1 rounded-md text-black `} >{props.text}</p>
-                </div>
+            <div className='h-fit relative p-2 border-2 mb-4   w-72 bg-red-800 '>
+                <div className='aspect-square relative bg-orange-400 rounded-md flex items-start justify-end  '>
+                     {
+                      newItem &&  <BTN text="New" color="bg-[#00FF66]"  /> || discount && <BTN text="-35%" color="bg-[#DB4444]"  /> 
+                     }
                     <div className='h-24 w-10  mr-4 mt-2 flex justify-between  flex-col '  >
                         <p className="bg-white h-10 rounded-full  flex items-center justify-center"  >
                         <GoHeart className='text-3xl text-black font-bold' />

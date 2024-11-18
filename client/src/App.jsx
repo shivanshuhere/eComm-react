@@ -3,7 +3,7 @@ import TopHeader from "./components/Header/TopHeader"
 import { useEffect, useState } from "react"
 import Footer from "./components/Footer/Footer"
 import Header from "./components/Header/Header"
-import Product_card from "./components/Product_card"
+
 
 const App = () => {
 
@@ -11,11 +11,11 @@ const App = () => {
   useEffect(() => {
     setTopheaderText("Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!")
   }, [])
-  const [newItem,setNewItem]=useState(true)
-  const [discount,setDiscount]=useState(true)
+ 
 
 
   return (
+
     <div className=" w-full h-full">
       {
         topheaderText &&
@@ -23,21 +23,8 @@ const App = () => {
       }
       <Header />
       <Outlet />
-      {
-       <div>
-
-        {
-          
-          newItem && <Product_card text='New' color='bg-[#00FF66]'  />
-        } 
-        {
-          discount && <Product_card text='-35%' color='bg-[#DB4444]'  />
-
-        }
-       </div>
 
 
-      }
       <Footer />
 
     </div>

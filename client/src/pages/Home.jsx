@@ -1,11 +1,24 @@
 import { Link } from "react-router-dom"
+import Product_card from "../components/Product_card.jsx"
+import PanelCategory from "../components/PanelCategory.jsx"
+import { useState } from "react"
 
-const Home = () => {
+
+const Home = (props) => {
+  
   return (
+    
     <div >
         <Link to="register"> Akhil</Link>
-        <div className=" w-10 ">
-</div>
+        {
+       <div>
+<Product_card   />
+<Product_card   />
+
+      
+       </div>
+} 
+    <PanelCategory textcolor='text-[white]' selected="bg-[#DB4444]"/>
     </div>
   )
 }
