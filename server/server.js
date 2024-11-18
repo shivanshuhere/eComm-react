@@ -1,9 +1,11 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import router from './routes/userRoutes.js'
+import userRouter from './routes/userRoutes.js'
 import cookieparser from 'cookie-parser'
 import connectDB from './DataBase/connection.js'
+import productRouter from './routes/productRoutes.js'
+import cartRouter from './routes/cartRoutes.js'
 
 
 dotenv.config(
@@ -36,4 +38,6 @@ connectDB().then(() => {
 
 
 // userRouter
-app.use('/api/user', router)
+app.use('/api/user', userRouter)
+app.use('/api/product', productRouter)
+app.use('/api/cart', cartRouter)

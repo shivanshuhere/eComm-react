@@ -1,12 +1,14 @@
 import { Router } from 'express'
-import { register, login, otp }from '../controllers/userController.js'
+import { register, login, otp, logout, updateUser, addUserAddress }from '../controllers/userController.js'
 
-const router = Router()
+const userRouter = Router()
 
-router.post('/register', register)
-router.post('/login', login)
-// Router.post('/logout', logout)
-router.post('/otp', otp)
-// Router.post('/resendOtp', resendOtp)
+userRouter.post('/otp', otp)
+userRouter.post('/register', register)
+userRouter.post('/login', login)
+userRouter.post('/update', updateUser)
+userRouter.post('/address', addUserAddress)
+userRouter.post('/logout', logout)
 
-export default router
+
+export default userRouter

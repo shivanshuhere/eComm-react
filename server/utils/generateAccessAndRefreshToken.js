@@ -22,6 +22,7 @@ const generateRefreshToken = async (userId) =>{
 
         const refreshToken = await jwt.sign({ _id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
         user.refreshToken = refreshToken
+        await user.save()
 
         return {refreshToken}
 
