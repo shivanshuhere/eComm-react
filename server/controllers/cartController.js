@@ -4,17 +4,17 @@ import Product from "../models/ProductModel.js";
 
 const productAddToCart = async (req, res) => {
 
-    const body = req.body;          
-    const { product_id, quantity } = body;
+    const body = req.body; 
 
-    const user_id = req.body
+    const { user_id, product_id, quantity } = body;
 
     try {
-        console.log(product_id, quantity, user_id)
-        const product = await Product.findById(product_id);
-        if (!product) {
-            return res.status(404).json({ message: "Product not found" });
-        }
+
+        // const product = await Product.findById(product_id);
+
+        // if (!product) {
+        //     return res.status(404).json({ message: "Product not found" });
+        // }
 
         // const cart = await Cart.findOne({ userId: user_id });
         // if (!cart) {
@@ -38,8 +38,7 @@ const productAddToCart = async (req, res) => {
                     productId: product_id,
                     quantity: quantity
                 }
-            ],
-            totalAmount: product.price * quantity
+            ]
         })
 
         return res.status(201).json({ message: "Product added to cart successfully",
@@ -53,5 +52,27 @@ const productAddToCart = async (req, res) => {
     }
 }
 
+const removeProductFromCart = async (req, res) => {
+    try {
+        const cartId = req.body
 
-export { productAddToCart }
+        const _id = cartId.cartId
+
+        if (!cartId) {
+            return res.status(404).json({ message: "Cart id is required" });
+        }
+
+        await Cart.findByIdAndDelete(_id);
+
+        return res.status(200).json({ message: "Product removed from cart successfully" });
+        
+    } catch (error) {
+        return res.status(500).json({ message: error.message,
+            error: error
+         });
+    }
+
+}
+
+
+export { productAddToCart, removeProductFromCart }
