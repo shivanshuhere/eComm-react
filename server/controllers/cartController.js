@@ -2,15 +2,18 @@ import mongoose from "mongoose";
 import Cart from "../models/CartModel.js";
 import Product from "../models/ProductModel.js";
 import { ObjectId } from "mongodb";
+import findUser from "../utils/findUserByrefreshToken.js";
 
 
 const productAddToCart = async (req, res) => {
 
-    const body = req.body; 
-
-    const { user_id, product_id, quantity } = body;
-
+    
     try {
+        const body = req.body; 
+    
+        const { refreshToken, product_id, quantity } = body;
+
+        const user_id = await findUser(refreshToken);
 
         const cart = await Cart.create({
             userId: new mongoose.Types.ObjectId(user_id),

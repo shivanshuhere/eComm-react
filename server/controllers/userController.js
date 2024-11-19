@@ -230,7 +230,7 @@ const getUserCart = async (req, res) => {
 
         const id = await findUser(refreshToken.refreshToken);
 
-        const cartDetals = await User.aggregate([
+        const carts = await User.aggregate([
             {
                 $match: {
                     _id: new mongoose.Types.ObjectId(id)
@@ -301,9 +301,7 @@ const getUserCart = async (req, res) => {
             }
         ])
 
-        console.log(cartDetals)
-
-        return res.status(200).json({ message: "User cart", data: cartDetals, success: true });
+        return res.status(200).json({ message: "User cart", data: carts[0], success: true });
     } catch (error) {
         res.status(500).json({
             message: error.message,
