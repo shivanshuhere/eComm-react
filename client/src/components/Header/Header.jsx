@@ -44,7 +44,7 @@ const Header = () => {
                     <div className="hidden lg:block">
                         <div className=" flex items-center gap-2">
                         <div id="search" className=" border-2 px-2  py-1 rounded-md flex items-center">
-                            <input type="text" className=" md:w-36 lg:w-40 xl:w-48 h-full outline-none text-sm text-gray-500 " />
+                            <input type="text" className=" md:w-36 lg:w-40 xl:w-48 h-full outline-none text-sm text-gray-500 bg-transparent " />
                             <CiSearch className=" text-2xl cursor-pointer" />
                         </div>
                         <div>
