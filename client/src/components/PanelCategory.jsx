@@ -11,7 +11,7 @@ import { VscGame } from "react-icons/vsc";
 
 const PanelCategory = (props) => {
   return (
-    <div className='w-full h-96 bg-orange-500 py-1 px-10'>
+    <div className=' sm: w-full h-96 bg-orange-500 py-1 px-10'>
         <div className= 'title-box flex items-center gap-3'>
             <div className='box h-10 w-5 bg-red-600 rounded-md'>
 
