@@ -3,6 +3,7 @@ import SendEmail, { WelcomeEmail } from '../utils/Email.js'
 import bcryptjs from 'bcryptjs'
 import { generateAccessToken, generateRefreshToken } from '../utils/generateAccessAndRefreshToken.js'
 import findUser from '../utils/findUserByrefreshToken.js'
+import mongoose from 'mongoose'
 
 
 const register = async (req, res) => {
@@ -218,4 +219,98 @@ const addUserAddress = async (req, res) => {
 }
 
 
-export { register, otp, login, logout, updateUser, addUserAddress }
+const getUserCart = async (req, res) => {
+    try {
+
+        const refreshToken = req.body
+
+        if (!refreshToken) {
+            return res.status(404).json({ message: "Refresh token not found" });
+        }
+
+        const id = await findUser(refreshToken.refreshToken);
+
+        const cartDetals = await User.aggregate([
+            {
+                $match: {
+                    _id: new mongoose.Types.ObjectId(id)
+                }
+            },
+            {
+                $lookup: {
+                    from: "carts",
+                    localField: "_id",
+                    foreignField: "userId",
+                    as: "cartDetals",
+                    pipeline: [
+                        {
+                            $lookup: {
+                                from: "products",
+                                localField: "productId",
+                                foreignField: "_id",
+                                as: "productDetals",
+                                pipeline: [
+                                    {
+                                        $project: {
+                                            name: 1,
+                                            image: 1,
+                                            price: 1
+                                        }
+                                    }
+                                ]
+
+                            }
+                        },
+                        {
+                            $addFields: {
+                                productDetals: {
+                                    $first: "$productDetals"
+                                }
+                            }
+                        },
+                        {
+                            $addFields: {
+                                totalAmount: {
+                                    $multiply: ["$quantity", "$productDetals.price"]
+                                }
+                            }
+                        },
+                        {
+                            $project: {
+                                productDetals: 1,
+                                quantity: 1,
+                                totalAmount: 1
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                $addFields: {
+                    totalCarts: {
+                        $size: "$cartDetals"
+                    }
+                }
+            },
+            {
+                $project: {
+                    cartDetals: 1,
+                    totalCarts: 1,
+                    quantity: 1
+                }
+            }
+        ])
+
+        console.log(cartDetals)
+
+        return res.status(200).json({ message: "User cart", data: cartDetals, success: true });
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+            error: error,
+        });
+    }
+}
+
+
+export { register, otp, login, logout, updateUser, addUserAddress, getUserCart }
