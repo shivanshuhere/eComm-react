@@ -5,6 +5,7 @@ import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
 import Otp from "../pages/auth/Otp";
 import Error from "../pages/error/Error.jsx";
+import Account from "../pages/Account.jsx";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: "verify-otp",
                 element: <Otp />,
+            },
+            {
+                path: "account",
+                element: <Account />,
             },
             {
                 path: "/*",
