@@ -139,7 +139,7 @@ const logout = async (req, res) => {
 
     try {
 
-        const refreshToken = req.cookies.refreshToken
+        const refreshToken = req.body.refreshToken
 
         if (!refreshToken) {
             return res.status(404).json({ message: "Refresh token not found" });
