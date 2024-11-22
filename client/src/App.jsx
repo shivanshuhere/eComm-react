@@ -5,17 +5,18 @@ import Footer from "./components/Footer/Footer"
 import Header from "./components/Header/Header"
 import { Toaster } from "react-hot-toast"
 
+
 const App = () => {
 
   const [topheaderText, setTopheaderText] = useState('')
-
   useEffect(() => {
     setTopheaderText("Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!")
   }, [])
-
+ 
 
 
   return (
+
     <div className=" w-full h-full">
       <Toaster />
       {
@@ -24,6 +25,8 @@ const App = () => {
       }
       <Header />
       <Outlet />
+
+
       <Footer />
 
     </div>
