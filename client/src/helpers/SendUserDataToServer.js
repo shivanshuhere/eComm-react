@@ -1,7 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://localhost:8000";
 
 const SendRegisterDataToServer = async (data) => {
     try {
@@ -42,7 +42,19 @@ const SendLoginDataToServer = async (data) => {
     }
 };
 
+const refreshToken = window.localStorage.getItem('token')
+
+const getUserDataFromServer = async () => {
+    try {
+        const response = await axios.post(`${BASE_URL}/api/user/getuser`, {refreshToken})
+
+        return response
+    } catch (error) {
+        toast.error(error.response.data.message)
+    }
+}
 
 
-export {SendRegisterDataToServer, SendOtpDataToServer, SendLoginDataToServer
+
+export {SendRegisterDataToServer, SendOtpDataToServer, SendLoginDataToServer, getUserDataFromServer
 }

@@ -48,9 +48,11 @@ const handleSubmit = async (e)=>{
   if (validEmail) {
     const response = await SendLoginDataToServer(data)
 
+    setLoading(false)
+
     if (response?.data?.success) {
-      setLoading(false)
       dispatch(addUserData(response.data.data.user))
+      window.localStorage.setItem('token', response.data.data.RefreshToken)
       navigate('/')
     }
     

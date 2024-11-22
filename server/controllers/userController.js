@@ -4,6 +4,7 @@ import bcryptjs from 'bcryptjs'
 import { generateAccessToken, generateRefreshToken } from '../utils/generateAccessAndRefreshToken.js'
 import findUser from '../utils/findUserByrefreshToken.js'
 import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
 
 
 const register = async (req, res) => {
@@ -111,9 +112,33 @@ const login = async (req, res) => {
     }
 }
 
+const getUser = async (req, res) => {
+    try {
+
+        const refreshToken = req.body.refreshToken
+
+        const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+
+        const UserId = decoded._id
+
+        const user = await User.findById(UserId)
+
+        return res.status(200).json({
+            user,
+            success: true
+        });
+    } catch (error) {
+        return {
+            message: error.message,
+            error: error,
+        };
+    }
+}
+
 const logout = async (req, res) => {
 
     try {
+
         const refreshToken = req.cookies.refreshToken
 
         if (!refreshToken) {
@@ -154,7 +179,7 @@ const updateUser = async (req, res) => {
     try {
 
         const body = req.body;
-        const { refreshToken, firstname, lastname } = body;
+        const { refreshToken, firstname, lastname, password } = body;
 
         if (!firstname) {
             return res.status(404).json({ message: "firstname is required" });
@@ -162,7 +187,7 @@ const updateUser = async (req, res) => {
 
         const userId = await findUser(refreshToken);
 
-        await User.findByIdAndUpdate(userId, { firstname: firstname, lastname: lastname }, { new: true })
+        await User.findByIdAndUpdate(userId, { firstname: firstname, lastname: lastname, password: password }, { new: true })
         return res
             .status(200)
             .json(
@@ -311,4 +336,4 @@ const getUserCart = async (req, res) => {
 }
 
 
-export { register, otp, login, logout, updateUser, addUserAddress, getUserCart }
+export { register, otp, login, getUser, logout, updateUser, addUserAddress, getUserCart }

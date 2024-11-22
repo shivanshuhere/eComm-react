@@ -1,16 +1,26 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useSelector } from "react-redux";
 
 
 
 const Header = () => {
 
     const [user, setUser] = useState("")
+
+    const userData = useSelector(state => state.user)
+
+    useEffect(() => {
+       if(userData?.email){
+        setUser(userData.firstname)
+       }
+    }, [userData])
+    
 
 
     return (
@@ -27,8 +37,8 @@ const Header = () => {
                     <div className="flex justify-center items-center">
                         <ul className=" flex  md:gap-14 lg:gap-16 xl:gap-20">
                             <li><Link to='/'>Home</Link></li>
-                            <li><Link to='/'>About</Link></li>
-                            <li><Link to='/'>Contact</Link></li>
+                            <li><Link to='/about'>About</Link></li>
+                            <li><Link to='/contact'>Contact</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -60,10 +70,10 @@ const Header = () => {
                     {
                         user 
                         ? 
-                        <div>User</div>
+                        <div>{user}</div>
                         :
                         <div className=" flex items-center pl-3 py-1.5 rounded-lg font-medium">
-                            <Link to='/register'>LogIn</Link>
+                            <Link to='/login'>LogIn</Link>
                             <MdOutlineKeyboardArrowDown className=" " />
                         </div>
                     }
