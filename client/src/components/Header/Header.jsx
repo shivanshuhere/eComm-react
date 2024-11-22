@@ -20,6 +20,8 @@ const Header = () => {
     const [user, setUser] = useState("")
     const [show, setShow] = useState(false)
     const [color, setColor] = useState(false)
+    const [cart, setCart] = useState(0)
+    const [wishlist, setWishlist] = useState(0)
 
     const userData = useSelector(state => state.user)
 
@@ -73,13 +75,20 @@ const Header = () => {
                             <input type="text" className=" md:w-36 lg:w-40 xl:w-48 h-full outline-none text-sm text-gray-500 bg-transparent " />
                             <CiSearch className=" text-2xl cursor-pointer" />
                         </div>
-                        <div>
-                            <Link><CiHeart className=" text-3xl" /></Link>
-                        </div>
-                        <div>
-                            
-                            <Link><CiShoppingCart className=" text-3xl" /></Link>
-                        </div>
+                        <Link to='/wishlist' className=" relative size-fit">
+                        {
+                            wishlist > 0 &&
+                            <div className=" absolute bg-Orange w-4 h-4 rounded-full top-0 right-0 text-xs text-white flex items-center justify-center ">{wishlist}</div>
+                        }
+                            <span><CiHeart className=" text-3xl" /></span>
+                        </Link>
+                        <Link to='/cart' className=" relative size-fit">
+                        {
+                            cart > 0 &&
+                            <div className=" absolute bg-Orange w-4 h-4 rounded-full top-0 right-0 text-xs text-white flex items-center justify-center ">{cart}</div>
+                        }
+                            <span><CiShoppingCart className=" text-3xl" /></span>
+                        </Link>
                         </div>
                     </div>
                     
