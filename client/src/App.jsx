@@ -3,6 +3,7 @@ import TopHeader from "./components/Header/TopHeader"
 import { useEffect, useState } from "react"
 import Footer from "./components/Footer/Footer"
 import Header from "./components/Header/Header"
+import { Toaster } from "react-hot-toast"
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
   return (
 
     <div className=" w-full h-full">
+      <Toaster />
       {
         topheaderText &&
         <TopHeader text={topheaderText} link='/register' />
