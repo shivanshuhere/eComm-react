@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUserDataFromServer } from "../helpers/SendUserDataToServer"
 import { useEffect } from "react"
 import { addUserData } from "../redux/userSlice"
+import BackToTop from "../components/BackToTop"
 
 
 
@@ -24,11 +25,12 @@ const Home = () => {
 
 
   return (
-    <div >
+    <div className=" w-full h-[100vh]" >
         <Link to="register"> Akhil</Link>
-        <div className=" w-40 border ">
+        <div className=" w-40 h-[200vh] border ">
           
         </div>
+        <BackToTop />
     </div>
   )
 }

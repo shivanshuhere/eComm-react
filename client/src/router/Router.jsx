@@ -7,6 +7,7 @@ import Otp from "../pages/auth/Otp";
 import Error from "../pages/error/Error.jsx";
 import Contact from "../pages/Contact.jsx";
 import About from "../pages/About.jsx";
+import Cart from "../pages/Cart.jsx";
 
 const token = window.localStorage.getItem("token");
 
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path: "verify-otp",
                 element: <Otp />,
+            },
+            {
+                path: "cart",
+                element: <Cart />,
             },
             {
                 path: "/*",
