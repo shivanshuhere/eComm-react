@@ -10,7 +10,7 @@ import Profile from "../components/User/Profile.jsx";
 
 import Contact from "../pages/Contact.jsx";
 import About from "../pages/About.jsx";
-
+import Cart from "../pages/Cart.jsx";
 const token = window.localStorage.getItem("token");
 const router = createBrowserRouter([
     {
@@ -66,6 +66,10 @@ const router = createBrowserRouter([
                         element: <div>My cancelation</div>,
                     },
                 ],
+            },
+            {
+                path: "cart",
+                element: <Cart />,
             },
             {
                 path: "/*",
