@@ -179,13 +179,22 @@ const updateUser = async (req, res) => {
     try {
 
         const body = req.body;
-        const { refreshToken, firstname, lastname, password } = body;
+        const { refreshToken, firstname, lastname, oldpassword, newpassword } = body;
 
         if (!firstname) {
             return res.status(404).json({ message: "firstname is required" });
         }
 
         const userId = await findUser(refreshToken);
+
+        const user  = await User.findById(userId)
+
+        const isPasswordCorrect = await user.isPasswordCorrect(oldpassword);
+
+        if (!isPasswordCorrect) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+        const password = newpassword
 
         await User.findByIdAndUpdate(userId, { firstname: firstname, lastname: lastname, password: password }, { new: true })
         return res
