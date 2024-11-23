@@ -1,4 +1,4 @@
-import Aside from "../components/Aside.jsx";
+import Aside from "../components/Aside";
 
 const headings = ["Manage My Account", "My Orders", "My WishList"];
 const links = [
