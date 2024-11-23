@@ -62,9 +62,9 @@ const Header = () => {
                 <div className=" h-full w-fit hidden md:block py-2">
                     <div className="flex justify-center items-center">
                         <ul className=" flex  md:gap-14 lg:gap-16 xl:gap-20">
-                            <li><Link to='/'>Home</Link></li>
-                            <li><Link to='/about'>About</Link></li>
-                            <li><Link to='/contact'>Contact</Link></li>
+                            <li><Link to='/' className=" hover:text-Orange">Home</Link></li>
+                            <li><Link to='/about' className=" hover:text-Orange">About</Link></li>
+                            <li><Link to='/contact' className=" hover:text-Orange">Contact</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -116,16 +116,16 @@ const Header = () => {
                                 <Link to='/wishlist' className=" relative size-fit">
                                     {
                                         wishlist > 0 &&
-                                        <div className=" absolute bg-Orange w-4 h-4 rounded-full top-0 right-0 text-xs text-white flex items-center justify-center ">{wishlist}</div>
+                                        <div className=" absolute bg-Orange w-5 h-5 rounded-md -top-2 -right-1 text-xs text-white flex items-center justify-center ">{wishlist}</div>
                                     }
-                                    <span><CiHeart className=" text-3xl" /></span>
+                                    <span><CiHeart className=" text-3xl hover:text-Orange" /></span>
                                 </Link>
                                 <Link to='/cart' className=" relative size-fit">
                                     {
                                         cart > 0 &&
-                                        <div className=" absolute bg-Orange w-4 h-4 rounded-full top-0 right-0 text-xs text-white flex items-center justify-center ">{cart}</div>
+                                        <div className=" absolute bg-Orange w-5 h-5 rounded-md -top-2 -right-1 text-xs text-white flex items-center justify-center ">{cart}</div>
                                     }
-                                    <span><CiShoppingCart className=" text-3xl" /></span>
+                                    <span><CiShoppingCart className=" text-3xl hover:text-Orange" /></span>
                                 </Link>
                             </div>
                         </div>
@@ -137,7 +137,7 @@ const Header = () => {
                                     setShow(!show)
                                     setColor(!color)
                                 }}>
-                                    <FaRegUserCircle />
+                                    <FaRegUserCircle className=" text-xl" />
                                     {user}
                                 </div>
                                 :

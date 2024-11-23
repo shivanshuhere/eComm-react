@@ -25,8 +25,6 @@ const App = () => {
       }
       <Header />
       <Outlet />
-
-
       <Footer />
 
     </div>

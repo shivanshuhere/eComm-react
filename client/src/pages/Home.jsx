@@ -23,11 +23,13 @@ const Home = () => {
 
   const user = useSelector(state => state.user)
 
+  console.log(user)
+
 
   return (
     <div className=" w-full h-[100vh]" >
         <Link to="register"> Akhil</Link>
-        <div className=" w-40 h-[200vh] border ">
+        <div className=" w-40  border ">
           
         </div>
         <BackToTop />

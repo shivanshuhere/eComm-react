@@ -8,6 +8,7 @@ import Error from "../pages/error/Error.jsx";
 import Contact from "../pages/Contact.jsx";
 import About from "../pages/About.jsx";
 import Cart from "../pages/Cart.jsx";
+import Wishlist from "../pages/Wishlist.jsx";
 
 const token = window.localStorage.getItem("token");
 
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             {
                 path: "cart",
                 element: <Cart />,
+            },
+            {
+                path: "wishlist",
+                element: <Wishlist />,
             },
             {
                 path: "/*",

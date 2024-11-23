@@ -106,7 +106,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className=" absolute border-t-[.5px] flex items-center gap-1 justify-center border-[#313131] w-full h-10 bottom-0 text-[#5c5c5c]"><AiOutlineCopyright />
-            <p>Copyright Rimel 2024. All right reserved</p></div>
+            <p>Copyright QuickCart 2024. All right reserved</p></div>
             </div>
         </section>
     )
