@@ -5,6 +5,8 @@ import { SendLoginDataToServer } from '../../helpers/SendUserDataToServer'
 import { useDispatch } from 'react-redux'
 import { addUserData } from '../../redux/userSlice'
 import Loader from '../../components/Loder'
+/* This `Login` component is a functional component in a React application. It handles the login
+functionality of a user. Here's a breakdown of what it does: */
 const Login = () => {
 
   const navigate = useNavigate()
@@ -48,9 +50,11 @@ const handleSubmit = async (e)=>{
   if (validEmail) {
     const response = await SendLoginDataToServer(data)
 
+    setLoading(false)
+
     if (response?.data?.success) {
-      setLoading(false)
       dispatch(addUserData(response.data.data.user))
+      window.localStorage.setItem('token', response.data.data.RefreshToken)
       navigate('/')
     }
     

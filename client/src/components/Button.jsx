@@ -1,18 +1,17 @@
 
-// const Button = (props) => {
+const Button = (props) => {
+  return (
+    <div>
+         <button 
+         type="submit" 
+         className={`${props.width} ${props.height} border text-white font-medium py-2 px-4 rounded-md mt-4 bg-[#DB4444]`}
+         onClick={props?.handleonClick}
+         >
+            {props.text}
+         </button>
 
-//     // const {name, color, w, h} = props
-//   return (
-//     <div>
-//          <button 
-//          type="submit" 
-//          className={` border text-white font-medium py-1 px-2 rounded-md mt-4 ${props.color}`}
-//          >
-//             {props.name}
-//          </button>
+    </div>
+  )
+}
 
-//     </div>
-//   )
-// }
-
-// export default Button
+export default Button

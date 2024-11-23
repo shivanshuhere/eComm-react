@@ -9,6 +9,7 @@ export default {
       colors: {
         Black: "#212121",
         White: " #f6fcff",
+        Orange: "#DB4444",
       },
     },
   },

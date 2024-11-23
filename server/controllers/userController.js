@@ -3,6 +3,8 @@ import SendEmail, { WelcomeEmail } from '../utils/Email.js'
 import bcryptjs from 'bcryptjs'
 import { generateAccessToken, generateRefreshToken } from '../utils/generateAccessAndRefreshToken.js'
 import findUser from '../utils/findUserByrefreshToken.js'
+import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
 
 
 const register = async (req, res) => {
@@ -110,10 +112,34 @@ const login = async (req, res) => {
     }
 }
 
+const getUser = async (req, res) => {
+    try {
+
+        const refreshToken = req.body.refreshToken
+
+        const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+
+        const UserId = decoded._id
+
+        const user = await User.findById(UserId)
+
+        return res.status(200).json({
+            user,
+            success: true
+        });
+    } catch (error) {
+        return {
+            message: error.message,
+            error: error,
+        };
+    }
+}
+
 const logout = async (req, res) => {
 
     try {
-        const refreshToken = req.cookies.refreshToken
+
+        const refreshToken = req.body.refreshToken
 
         if (!refreshToken) {
             return res.status(404).json({ message: "Refresh token not found" });
@@ -153,7 +179,7 @@ const updateUser = async (req, res) => {
     try {
 
         const body = req.body;
-        const { refreshToken, firstname, lastname } = body;
+        const { refreshToken, firstname, lastname, password } = body;
 
         if (!firstname) {
             return res.status(404).json({ message: "firstname is required" });
@@ -161,7 +187,7 @@ const updateUser = async (req, res) => {
 
         const userId = await findUser(refreshToken);
 
-        await User.findByIdAndUpdate(userId, { firstname: firstname, lastname: lastname }, { new: true })
+        await User.findByIdAndUpdate(userId, { firstname: firstname, lastname: lastname, password: password }, { new: true })
         return res
             .status(200)
             .json(
@@ -218,4 +244,96 @@ const addUserAddress = async (req, res) => {
 }
 
 
-export { register, otp, login, logout, updateUser, addUserAddress }
+const getUserCart = async (req, res) => {
+    try {
+
+        const refreshToken = req.body
+
+        if (!refreshToken) {
+            return res.status(404).json({ message: "Refresh token not found" });
+        }
+
+        const id = await findUser(refreshToken.refreshToken);
+
+        const carts = await User.aggregate([
+            {
+                $match: {
+                    _id: new mongoose.Types.ObjectId(id)
+                }
+            },
+            {
+                $lookup: {
+                    from: "carts",
+                    localField: "_id",
+                    foreignField: "userId",
+                    as: "cartDetals",
+                    pipeline: [
+                        {
+                            $lookup: {
+                                from: "products",
+                                localField: "productId",
+                                foreignField: "_id",
+                                as: "productDetals",
+                                pipeline: [
+                                    {
+                                        $project: {
+                                            name: 1,
+                                            image: 1,
+                                            price: 1
+                                        }
+                                    }
+                                ]
+
+                            }
+                        },
+                        {
+                            $addFields: {
+                                productDetals: {
+                                    $first: "$productDetals"
+                                }
+                            }
+                        },
+                        {
+                            $addFields: {
+                                totalAmount: {
+                                    $multiply: ["$quantity", "$productDetals.price"]
+                                }
+                            }
+                        },
+                        {
+                            $project: {
+                                productDetals: 1,
+                                quantity: 1,
+                                totalAmount: 1
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                $addFields: {
+                    totalCarts: {
+                        $size: "$cartDetals"
+                    }
+                }
+            },
+            {
+                $project: {
+                    cartDetals: 1,
+                    totalCarts: 1,
+                    quantity: 1
+                }
+            }
+        ])
+
+        return res.status(200).json({ message: "User cart", data: carts[0], success: true });
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+            error: error,
+        });
+    }
+}
+
+
+export { register, otp, login, getUser, logout, updateUser, addUserAddress, getUserCart }
