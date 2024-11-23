@@ -5,7 +5,7 @@ const links = [
     [
         {
             name: "My Profile",
-            link: "/account/profile",
+            link: "/account",
         },
         {
             name: "Address Book",

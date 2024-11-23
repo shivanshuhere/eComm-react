@@ -1,7 +1,7 @@
 import React from "react";
 
 function Profile() {
-    const { firstName, lastName, email, address, password } = "";
+    const { firstName, lastName, email, address } = "";
     return (
         <>
             <section className="w-full h-full p-20 px-30  pt-0 ">
