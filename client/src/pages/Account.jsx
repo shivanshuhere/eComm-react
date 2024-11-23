@@ -1,40 +1,40 @@
 import Aside from "../components/Aside";
-
+import { Outlet } from "react-router-dom";
 const headings = ["Manage My Account", "My Orders", "My WishList"];
 const links = [
     [
         {
             name: "My Profile",
-            link: "/profile",
+            link: "/account/profile",
         },
         {
             name: "Address Book",
-            link: "/address",
+            link: "/account/address",
         },
         {
             name: "My Payment Option",
-            link: "/payment",
+            link: "/account/payment",
         },
     ],
     [
         {
             name: "My Return",
-            link: "/return",
+            link: "/account/return",
         },
         {
             name: "My Cancellation",
-            link: "/cancel",
+            link: "/account/cancel",
         },
     ],
 ];
 function Account() {
     return (
         <>
-            <section className="h-full w-full flex justify-between">
-                <aside>
+            <section className="h-full w-full flex justify-between p-10">
+                <aside className="flex gap-6 flex-col">
                     <Aside headings={headings} links={links} />
                 </aside>
-                <main>something</main>
+                <Outlet />
             </section>
         </>
     );
