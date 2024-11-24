@@ -1,34 +1,24 @@
 
 import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from 'react-redux'
-import { getUserDataFromServer } from "../helpers/SendUserDataToServer"
-import { useEffect } from "react"
-import { addUserData } from "../redux/userSlice"
+import Product_card from "../components/Product_card.jsx"
+import PanelCategory from "../components/PanelCategory.jsx"
+import { useState } from "react"
 
 
-
-const Home = () => {
-
-  const dispatch = useDispatch()
-
-  const fetchUser = async () => {
-    const response = await getUserDataFromServer()
-    dispatch(addUserData(response?.data.user))
-  }
-
-  useEffect(() => {
-    fetchUser()
-  }, [ ])
-
-  const user = useSelector(state => state.user)
-
-
+const Home = (props) => {
+  
   return (
     <div >
         <Link to="register"> Akhil</Link>
-        <div className=" w-40 border ">
-          
-        </div>
+        {
+       <div>
+<Product_card   />
+<Product_card   />
+
+      
+       </div>
+} 
+    <PanelCategory textcolor='text-[white]' selected="bg-[#DB4444]"/>
     </div>
   )
 }

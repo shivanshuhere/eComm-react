@@ -14,8 +14,8 @@ const Product_card = (props) => {
 
     return (
         <>
-            <div className='h-fit relative p-2 border-2 mb-4   w-72 bg-red-800 '>
-                <div className='aspect-square relative bg-orange-400 rounded-md flex items-start justify-end  '>
+            <div className='h-fit relative p-2  mb-4   w-72  '>
+                <div className='aspect-square relative  rounded-md flex items-start justify-end  '>
                      {
                       newItem &&  <BTN text="New" color="bg-[#00FF66]"  /> || discount && <BTN text="-35%" color="bg-[#DB4444]"  /> 
                      }
